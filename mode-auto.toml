@@ -1,0 +1,35 @@
+#
+# Tests for the ERC-4804 auto mode
+#
+
+name = "ERC-4804 auto mode"
+
+
+[groups.root]
+name = "Root directory"
+
+[[groups.root.tests]]
+name = "Without \"/\" specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56"
+resolveMode = "auto"
+contractCallMode = "calldata"
+calldata = "0x"
+
+[[groups.root.tests]]
+name = "With \"/\" specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/"
+resolveMode = "auto"
+contractCallMode = "calldata"
+calldata = "0x"
+
+
+[groups.argument-uint256]
+name = "uint256 argument handling"
+
+[[groups.argument-uint256.tests]]
+name = "Type specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint256!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [1]

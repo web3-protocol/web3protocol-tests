@@ -1,0 +1,119 @@
+#
+# Tests for the base ERC-4804 protocol
+#
+
+name = "ERC-4804 base"
+
+
+[groups.basic-format]
+name = "Basic errors"
+
+[[groups.basic-format.tests]]
+name = "Random noise"
+url = "x!2dffsdk42"
+error = { label = "Invalid URL format", httpCode = 400 }
+
+[[groups.basic-format.tests]]
+name = "Bad protocol name"
+url = "web4://xxxx/xxxx"
+error = { label = "Protocol name is invalid", httpCode = 400 }
+
+[[groups.basic-format.tests]]
+name = "Missing hostname"
+url = "web3://"
+error = { label = "Invalid URL format", httpCode = 400 }
+
+
+
+[groups.address-hosts]
+name = "Address hosts"
+
+[[groups.address-hosts.tests]]
+name = "Ethereum address"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+contractAddress = "0x5a985f13345e820aa9618826b85f74c3986e1463"
+
+[[groups.address-hosts.tests]]
+name = "Bad ethereum address (38 chars)"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e14"
+error = { label = "Invalid contract address", httpCode = 400 }
+
+[[groups.address-hosts.tests]]
+name = "Bad ethereum address (42 chars)"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e146363"
+error = { label = "Invalid contract address", httpCode = 400 }
+
+
+
+[groups.chain-id]
+name = "Chain id"
+
+[[groups.chain-id.tests]]
+name = "Default chain"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+chainId = 1
+
+[[groups.chain-id.tests]]
+name = "Specified chain"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:5"
+chainId = 5
+
+[[groups.chain-id.tests]]
+name = "Specified chain > 65536"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:11155111"
+chainId = 11155111
+
+[[groups.chain-id.tests]]
+name = "Specified chain not existing"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:998989898"
+error = { label = "Unsupported chain 998989898", httpCode = 400 }
+
+[[groups.chain-id.tests]]
+name = "Specified chain not existing, overflowed id"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:998989898998989898998989898998989898"
+error = { label = "Unsupported chain 998989898998989898998989898998989898", httpCode = 400 }
+
+
+
+[groups.ens]
+name = "ENS"
+
+[[groups.ens.tests]]
+name = "ENS host"
+url = "web3://uniswap.eth"
+contractAddress = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
+domainNameResolver = "ens"
+domainNameResolverChainId = 1
+
+[[groups.ens.tests]]
+name = "Unregistered ENS name"
+url = "web3://fsdfzefszfsfsdfsdfefe.eth"
+error = { label = "Cannot resolve domain name", httpCode = 400 }
+
+# [[groups.ens.tests]]
+# name = "Invalid ENS name"
+# url = "web3://.eth"
+# error = { label = "Cannot resolve domain name", httpCode = 400 }
+
+[[groups.ens.tests]]
+name = "ENS host with ERC-6821 mapping"
+url = "web3://vitalikblog.eth"
+contractAddress = "0xe4ba0e245436b737468c206ab5c8f4950597ab7f"
+chainId = 42170
+domainNameResolver = "ens"
+domainNameResolverChainId = 1
+
+
+
+[groups.resolve-modes]
+name = "Resolve modes"
+
+[[groups.resolve-modes.tests]]
+name = "Auto resolve mode"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56"
+resolveMode = "auto"
+
+[[groups.resolve-modes.tests]]
+name = "Manual resolve mode"
+url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543"
+resolveMode = "manual"

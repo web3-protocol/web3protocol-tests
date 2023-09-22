@@ -1,0 +1,49 @@
+#
+# Tests for the ERC-4804 manual mode
+#
+
+name = "ERC-4804 manual mode"
+
+
+[groups.root]
+name = "Root directory"
+
+[[groups.root.tests]]
+name = "Without \"/\" specified"
+url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543"
+resolveMode = "manual"
+contractCallMode = "calldata"
+calldata = "0x2f"
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "text/html"
+
+[[groups.root.tests]]
+name = "With \"/\" specified"
+url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543/"
+resolveMode = "manual"
+contractCallMode = "calldata"
+calldata = "0x2f"
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "text/html"
+
+
+[groups.paths]
+name = "Paths"
+
+[[groups.paths.tests]]
+name = "Simple path"
+url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543/view/1"
+resolveMode = "manual"
+contractCallMode = "calldata"
+calldata = "0x2f766965772f31"
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "text/html"
+
+[[groups.paths.tests]]
+name = "Simple path with extension setting a mimetype"
+url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543/view/1.svg"
+resolveMode = "manual"
+contractCallMode = "calldata"
+calldata = "0x2f766965772f312e737667"
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "image/svg+xml"
