@@ -7,6 +7,7 @@ name = "ERC-4804 base"
 
 [groups.basic-format]
 name = "Basic errors"
+standard = "erc-4804"
 
 [[groups.basic-format.tests]]
 name = "Random noise"
@@ -23,10 +24,21 @@ name = "Missing hostname"
 url = "web3://"
 error = { label = "Invalid URL format", httpCode = 400 }
 
+[[groups.basic-format.tests]]
+name = "Missing hostname 2"
+url = "web3:///xxx"
+error = { label = "Invalid URL format", httpCode = 400 }
+
+[[groups.basic-format.tests]]
+name = "Missing hostname 3"
+url = "web3://:1/xxx"
+error = { label = "Invalid URL format", httpCode = 400 }
+
 
 
 [groups.address-hosts]
 name = "Address hosts"
+standard = "erc-4804"
 
 [[groups.address-hosts.tests]]
 name = "Ethereum address"
@@ -47,6 +59,7 @@ error = { label = "Invalid contract address", httpCode = 400 }
 
 [groups.chain-id]
 name = "Chain id"
+standard = "erc-4804"
 
 [[groups.chain-id.tests]]
 name = "Default chain"
@@ -73,10 +86,27 @@ name = "Specified chain not existing, overflowed id"
 url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:998989898998989898998989898998989898"
 error = { label = "Unsupported chain 998989898998989898998989898998989898", httpCode = 400 }
 
+[[groups.chain-id.tests]]
+name = "Non numeric chain id"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:eth"
+error = { label = "Invalid URL format", httpCode = 400 }
+
+
+
+[groups.domain-names]
+name = "Domain names"
+standard = "erc-4804"
+
+[[groups.domain-names.tests]]
+name = "Unsupported domain service"
+url = "web3://uniswap.lol"
+error = { label = "Unsupported domain name service suffix: lol", httpCode = 400 }
+
 
 
 [groups.ens]
 name = "ENS"
+standard = "erc-4804"
 
 [[groups.ens.tests]]
 name = "ENS host"
@@ -95,8 +125,14 @@ error = { label = "Cannot resolve domain name", httpCode = 400 }
 # url = "web3://.eth"
 # error = { label = "Cannot resolve domain name", httpCode = 400 }
 
-[[groups.ens.tests]]
-name = "ENS host with ERC-6821 mapping"
+
+
+[groups.ens-extension-erc-6821]
+name = "ENS ERC-6821 extension"
+standard = "erc-6821"
+
+[[groups.ens-extension-erc-6821.tests]]
+name = "ENS host with ERC-6821 chain switching"
 url = "web3://vitalikblog.eth"
 contractAddress = "0xe4ba0e245436b737468c206ab5c8f4950597ab7f"
 chainId = 42170
@@ -107,6 +143,7 @@ domainNameResolverChainId = 1
 
 [groups.resolve-modes]
 name = "Resolve modes"
+standard = "erc-4804"
 
 [[groups.resolve-modes.tests]]
 name = "Auto resolve mode"
@@ -117,3 +154,14 @@ resolveMode = "auto"
 name = "Manual resolve mode"
 url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543"
 resolveMode = "manual"
+
+
+
+[groups.resolve-modes-extension-erc-6944]
+name = "Resolve modes"
+standard = "erc-6944"
+
+[[groups.resolve-modes-extension-erc-6944.tests]]
+name = "Auto resolve mode"
+url = "web3://0x2b51a751d3c7d3554e28dc72c3b032e5f56aa656"
+resolveMode = "5219"

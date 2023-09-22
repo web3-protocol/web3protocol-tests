@@ -7,6 +7,7 @@ name = "ERC-4804 auto mode"
 
 [groups.root]
 name = "Root directory"
+standard = "erc-4804"
 
 [[groups.root.tests]]
 name = "Without \"/\" specified"
@@ -18,18 +19,72 @@ calldata = "0x"
 [[groups.root.tests]]
 name = "With \"/\" specified"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/"
-resolveMode = "auto"
-contractCallMode = "calldata"
-calldata = "0x"
+error = { label = "Pathname in auto mode is invalid", httpCode = 400 }
+
 
 
 [groups.argument-uint256]
 name = "uint256 argument handling"
+standard = "erc-4804"
 
 [[groups.argument-uint256.tests]]
 name = "Type specified"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint256!1"
 resolveMode = "auto"
 contractCallMode = "method"
+methodName = "tokenHTML"
 methodArgs = [{type = "uint256"}]
 methodArgValues = [1]
+
+[[groups.argument-uint256.tests]]
+name = "Bad value (invalid number)"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint256!1n"
+error = { label = "Argument is not a number: 1n", httpCode = 400 }
+
+[[groups.argument-uint256.tests]]
+name = "Bad value (negative number)"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint256!-1"
+error = { label = "Number is negative: -1", httpCode = 400 }
+
+[[groups.argument-uint256.tests]]
+name = "Autodetection"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [1]
+
+
+
+[groups.argument-bytes32]
+name = "bytes32 argument handling"
+standard = "erc-4804"
+
+[[groups.argument-bytes32.tests]]
+name = "Type specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes32!0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bytes32"}]
+methodArgValues = ["0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"]
+
+[[groups.argument-bytes32.tests]]
+name = "Bad value"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes32!0x59f7"
+error = { label = "Argument is not a valid hex string: 0x59f7", httpCode = 400 }
+
+[[groups.argument-bytes32.tests]]
+name = "Bad hexadecimal"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes32!0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f48g"
+error = { label = "Argument is not a valid hex string: 0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f48g", httpCode = 400 }
+
+[[groups.argument-bytes32.tests]]
+name = "Autodetection"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bytes32"}]
+methodArgValues = ["0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"]

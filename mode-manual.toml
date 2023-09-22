@@ -7,6 +7,7 @@ name = "ERC-4804 manual mode"
 
 [groups.root]
 name = "Root directory"
+standard = "erc-4804"
 
 [[groups.root.tests]]
 name = "Without \"/\" specified"
@@ -29,6 +30,7 @@ FirstValueAsBytesMimeType = "text/html"
 
 [groups.paths]
 name = "Paths"
+standard = "erc-4804"
 
 [[groups.paths.tests]]
 name = "Simple path"
@@ -47,3 +49,21 @@ contractCallMode = "calldata"
 calldata = "0x2f766965772f312e737667"
 contractReturnProcessing = "firstValueAsBytes"
 FirstValueAsBytesMimeType = "image/svg+xml"
+
+[[groups.paths.tests]]
+name = "Simple path with URI encoded pathname"
+url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543/view/%201"
+resolveMode = "manual"
+contractCallMode = "calldata"
+calldata = "0x2f766965772f25323031" # /view/%201
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "text/html"
+
+[[groups.paths.tests]]
+name = "Simple path with URI encoded query"
+url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543/view/1?a=1%26b%3D2"
+resolveMode = "manual"
+contractCallMode = "calldata"
+calldata = "0x2f766965772f313f613d312532366225334432" # // /view/1?a=1%26b%3D2
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "text/html"
