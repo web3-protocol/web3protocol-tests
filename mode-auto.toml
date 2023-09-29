@@ -23,6 +23,17 @@ error = { label = "Pathname in auto mode is invalid", httpCode = 400 }
 
 
 
+[groups.argument-types]
+name = "Argument types"
+standard = "erc-4804"
+
+[[groups.argument-types.tests]]
+name = "Non existing type"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/xoxo!1"
+error = { label = "Unknown type: xoxo", httpCode = 400 }
+
+
+
 [groups.argument-uint256]
 name = "uint256 argument handling"
 standard = "erc-4804"
@@ -34,15 +45,20 @@ resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "uint256"}]
-methodArgValues = [1]
+methodArgValues = [{value = 1}]
 
 [[groups.argument-uint256.tests]]
-name = "Bad value (invalid number)"
+name = "Type specified: Bad value (invalid number)"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint256!1n"
 error = { label = "Argument is not a number: 1n", httpCode = 400 }
 
 [[groups.argument-uint256.tests]]
-name = "Bad value (negative number)"
+name = "Type specified: Bad value (value with decimal)"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint256!1.2"
+error = { label = "Argument is not a number: 1.2", httpCode = 400 }
+
+[[groups.argument-uint256.tests]]
+name = "Type specified: Bad value (negative number)"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint256!-1"
 error = { label = "Number is negative: -1", httpCode = 400 }
 
@@ -53,7 +69,12 @@ resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "uint256"}]
-methodArgValues = [1]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-uint256.tests]]
+name = "Autodetection: Bad value (negative number"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/-1"
+error = { label = "Number is negative: -1", httpCode = 400 }
 
 
 
@@ -68,7 +89,7 @@ resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "bytes32"}]
-methodArgValues = ["0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"]
+methodArgValues = [{value = "0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"}]
 
 [[groups.argument-bytes32.tests]]
 name = "Bad value"
@@ -87,4 +108,264 @@ resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "bytes32"}]
-methodArgValues = ["0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"]
+methodArgValues = [{value = "0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f481"}]
+
+
+
+[groups.argument-address]
+name = "address argument handling"
+standard = "erc-4804"
+
+[[groups.argument-address.tests]]
+name = "Type specified"
+url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!0xcEe284F754E854890e311e3280b767F80797180d"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "balanceOf"
+methodArgs = [{type = "address"}]
+methodArgValues = [{value = "0xcEe284F754E854890e311e3280b767F80797180d"}]
+
+[[groups.argument-address.tests]]
+name = "Bad value : bad hexadecimal"
+url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!0xcEe284F754E854890e311e3280b767F80797180g"
+error = { label = "Unrecognized address", httpCode = 400 }
+
+[[groups.argument-address.tests]]
+name = "Bad value : invalid length"
+url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!0xcEe284F754E854890e311e3280b767F80797180da"
+error = { label = "Unrecognized address", httpCode = 400 }
+
+[[groups.argument-address.tests]]
+name = "Type specified, domain name version"
+url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!uniswap.eth"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "balanceOf"
+methodArgs = [{type = "address"}]
+methodArgValues = [{value = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"}]
+
+[[groups.argument-address.tests]]
+name = "Type specified, domain name version: Non existing domain"
+url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!uniswapxxxxxxxxxxxxxx.eth"
+error = { label = "Cannot resolve domain name", httpCode = 404 }
+
+[[groups.argument-address.tests]]
+name = "Type specified, domain name version: Non existing domain name provider"
+url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!uniswapxxxxxxxxxxxxxx.abcd"
+error = { label = "Unsupported domain name suffix: abcd", httpCode = 400 }
+
+
+
+[groups.argument-bytes]
+name = "bytes argument handling"
+standard = "erc-4804"
+
+[[groups.argument-bytes.tests]]
+name = "Type specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes!0x4578457f"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bytes"}]
+methodArgValues = [{value = "0x4578457f"}]
+
+[[groups.argument-bytes.tests]]
+name = "Type specified : Bad value (not starting by 0x)"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes!4578457C"
+error = { label = "Argument is not a valid hex string: 4578457C", httpCode = 400 }
+
+[[groups.argument-bytes.tests]]
+name = "Type specified : Bad value (Uneven number of chars"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes!0x47C"
+error = { label = "Argument is not a valid hex string: 0x47C", httpCode = 400 }
+
+[[groups.argument-bytes.tests]]
+name = "Type specified : Bad value (Invalid hexa chars)"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes!0x47fg"
+error = { label = "Argument is not a valid hex string: 0x47fg", httpCode = 400 }
+
+[[groups.argument-bytes.tests]]
+name = "Autodetection"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/0x4578457f"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bytes"}]
+methodArgValues = [{value = "0x4578457f"}]
+
+
+
+[groups.argument-string]
+name = "string argument handling"
+standard = "erc-4804"
+
+[[groups.argument-string.tests]]
+name = "Base"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string!1234"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "1234"}]
+
+[[groups.argument-string.tests]]
+name = "URI-percent-encoding of special chars: !/?%"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string!%21%2F%3F%25"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "!/?%"}]
+
+[[groups.argument-string.tests]]
+name = "URI-percent-encoding of utf-8 chars"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string!%F0%9F%99%82"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "🙂"}]
+
+[[groups.argument-string.tests]]
+name = "Explicit casting of address"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string!0xcEe284F754E854890e311e3280b767F80797180d"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "0xcEe284F754E854890e311e3280b767F80797180d"}]
+
+
+
+[groups.argument-multiple]
+name = "Multiple arguments"
+standard = "erc-4804"
+
+[[groups.argument-multiple.tests]]
+name = "Specified types"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string!1234/uint256!2"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}, {type = "uint256"}]
+methodArgValues = [{value = "1234"}, {value = 2}]
+
+[[groups.argument-multiple.tests]]
+name = "Autodetected types"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1234/uniswap.eth/0xabcdef"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint256"}, {type = "address"}, {type = "bytes"}]
+methodArgValues = [{value = 1234}, {value = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"}, {value = "0xabcdef"}]
+
+
+
+[groups.mime-type]
+name = "MIME Type handling"
+standard = "erc-4804"
+
+[[groups.mime-type.tests]]
+name = "No extension specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/string!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "1"}]
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = ""
+
+[[groups.mime-type.tests]]
+name = "Extension specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/string!1.svg"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "1.svg"}]
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "image/svg+xml"
+
+[[groups.mime-type.tests]]
+name = "Unknown xtension specified"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/string!1.ploua"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "1.ploua"}]
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = ""
+
+[[groups.mime-type.tests]]
+name = "Extension specified with multiple args"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/31/string!1.svg"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "uint256"}, {type = "string"}]
+methodArgValues = [{value = 31}, {value = "1.svg"}]
+contractReturnProcessing = "firstValueAsBytes"
+FirstValueAsBytesMimeType = "image/svg+xml"
+
+# [[groups.mime-type.tests]]
+# name = "Extension specified with no args"
+# url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/token.svg"
+# resolveMode = "auto"
+# contractCallMode = "method"
+# methodName = "tokenSVG"
+# methodArgs = []
+# methodArgValues = []
+# methodReturn = [{type = 'bytes'}]
+# contractReturnProcessing = "firstValueAsBytes"
+# FirstValueAsBytesMimeType = "image/svg+xml"
+
+
+[groups.return-types]
+name = "Return types"
+standard = "erc-4804"
+
+# [[groups.return-types.tests]]
+# name = "No returns"
+# url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1"
+# resolveMode = "auto"
+# contractCallMode = "method"
+# methodName = "tokenHTML"
+# methodArgs = [{type = "uint256"}]
+# methodArgValues = [{value = 1}]
+# methodReturn = [{type = 'bytes'}]
+# contractReturnProcessing = "firstValueAsBytes"
+
+[[groups.return-types.tests]]
+name = "Returns ()"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 1}]
+methodReturn = [{type = 'bytes32'}]
+contractReturnProcessing = "jsonEncodeValues"
+
+[[groups.return-types.tests]]
+name = "Returns with types"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,uint256)"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+methodReturn = [{type = 'uint256'}, {type = 'uint256'}]
+contractReturnProcessing = "jsonEncodeValues"
+
+[[groups.return-types.tests]]
+name = "Returns with types: combine with mime type to be ignored"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/string!50.svg?returns=(uint256,uint256)"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "string"}]
+methodArgValues = [{value = 2}, {value = "50.svg"}]
+methodReturn = [{type = 'uint256'}, {type = 'uint256'}]
+contractReturnProcessing = "jsonEncodeValues"
