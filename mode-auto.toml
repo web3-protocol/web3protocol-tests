@@ -1,8 +1,5 @@
-#
-# Tests for the ERC-4804 auto mode
-#
-
-name = "ERC-4804 auto mode"
+name = "Parsing ERC-4804 auto mode URLs"
+type = "urlParsing"
 
 
 [groups.root]

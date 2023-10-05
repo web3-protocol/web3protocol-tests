@@ -1,8 +1,5 @@
-#
-# Tests for the ERC-4804 manual mode
-#
-
-name = "ERC-4804 manual mode"
+name = "Parsing ERC-4804 manual mode URLs"
+type = "urlParsing"
 
 
 [groups.root]

@@ -1,0 +1,102 @@
+name = "Processing contract return"
+type = "contractReturnProcessing"
+
+
+[groups.decode-abi-encoded-bytes]
+name = "Decoding of ABI-encoded bytes"
+standard = "erc-4804"
+
+[[groups.decode-abi-encoded-bytes.tests]]
+name = "ABI-encoded bytes: Basic"
+contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002fa12000000000000000000000000000000000000000000000000000000000000"
+contractReturnProcessing = "decodeABIEncodedBytes"
+output = "0xfa12"
+
+[[groups.decode-abi-encoded-bytes.tests]]
+name = "ABI-encoded bytes: Empty"
+contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000"
+contractReturnProcessing = "decodeABIEncodedBytes"
+output = "0x"
+
+[[groups.decode-abi-encoded-bytes.tests]]
+name = "ABI-encoded bytes: Bad ABI-encoding: random data"
+contractReturn = "0xa3f130"
+contractReturnProcessing = "decodeABIEncodedBytes"
+error = { label = "Unable to parse contract output", httpCode = 400 }
+
+[[groups.decode-abi-encoded-bytes.tests]]
+name = "ABI-encoded bytes: Bad ABI-encoding: array length too high (0x60 instead of 0x40)"
+contractReturn = "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+contractReturnProcessing = "decodeABIEncodedBytes"
+error = { label = "Unable to parse contract output", httpCode = 400 }
+
+
+[groups.raw-bytes-json-encoded]
+name = "Raw bytes json encoded"
+standard = "erc-4804"
+
+[[groups.raw-bytes-json-encoded.tests]]
+name = "JSON encoding of raw bytes: basic"
+contractReturn = "0x5612fa"
+contractReturnProcessing = "jsonEncodeRawBytes"
+outputAsString = "[\"0x5612fa\"]"
+
+[[groups.raw-bytes-json-encoded.tests]]
+name = "JSON encoding of raw bytes: empty"
+contractReturn = "0x"
+contractReturnProcessing = "jsonEncodeRawBytes"
+outputAsString = "[\"0x\"]"
+
+
+[groups.json-encode-values]
+name = "JSON encode values"
+standard = "erc-4804"
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: bytes: In string with 0x prefix"
+contractReturn = "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000014200000000000000000000000000000000000000000000000000000000000000"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "bytes"}]
+outputAsString = "[\"0x42\"]"
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: bytes32: In string with 0x prefix"
+contractReturn = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "bytes32"}]
+outputAsString = "[\"0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\"]"
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: bytes32: In string"
+contractReturn = "000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000066168616861680000000000000000000000000000000000000000000000000000"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "string"}]
+outputAsString = "[\"ahahah\"]"
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: address: In string with 0x prefix"
+contractReturn = "0x000000000000000000000000ca300b47c9e75a2a3a0bd3295137341e809b504e"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "address"}]
+outputAsString = "[\"0xCa300B47C9E75a2A3a0bd3295137341E809B504E\"]"
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: uint256: In string"
+contractReturn = "0x000000000000000000000000000000000000000000000000000000000000002a"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "uint256"}]
+outputAsString = "[\"42\"]"
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: multiple values"
+contractReturn = "0x000000000000000000000000000000000000000000000000000000000000002a000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000014200000000000000000000000000000000000000000000000000000000000000"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "uint256"}, {type = "bytes"}]
+outputAsString = "[\"42\",\"0x42\"]"
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: No values"
+contractReturn = "0x"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = []
+outputAsString = "[]"

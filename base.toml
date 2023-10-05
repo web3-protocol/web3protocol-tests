@@ -1,8 +1,5 @@
-#
-# Tests for the base ERC-4804 protocol
-#
-
-name = "ERC-4804 base"
+name = "Parsing ERC-4804 URLs"
+type = "urlParsing"
 
 
 [groups.basic-format]
