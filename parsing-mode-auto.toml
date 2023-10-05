@@ -372,15 +372,37 @@ url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()&
 error = { label = "Duplicate return attribute", httpCode = 400 }
 
 [[groups.return-types.tests]]
-name = "?returns with types"
-url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,uint256)"
+name = "?returns with one type"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256)"
 resolveMode = "auto"
 contractCallMode = "method"
 methodName = "levelAndTile"
 methodArgs = [{type = "uint256"}, {type = "uint256"}]
 methodArgValues = [{value = 2}, {value = 50}]
 contractReturnProcessing = "jsonEncodeValues"
-jsonEncodedValueTypes = [{type = 'uint256'}, {type = 'uint256'}]
+jsonEncodedValueTypes = [{type = 'uint256'}]
+
+[[groups.return-types.tests]]
+name = "?returns with one array of a type"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256[])"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256[]'}]
+
+[[groups.return-types.tests]]
+name = "?returns with multiple types"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,uint256,bytes)"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256'}, {type = 'uint256'}, {type = 'bytes'}]
 
 [[groups.return-types.tests]]
 name = "?returns with an invalid type"

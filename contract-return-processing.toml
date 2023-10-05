@@ -11,12 +11,16 @@ name = "ABI-encoded bytes: Basic"
 contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002fa12000000000000000000000000000000000000000000000000000000000000"
 contractReturnProcessing = "decodeABIEncodedBytes"
 output = "0xfa12"
+httpCode = 200
+httpHeaders = {}
 
 [[groups.decode-abi-encoded-bytes.tests]]
 name = "ABI-encoded bytes: Empty"
 contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000"
 contractReturnProcessing = "decodeABIEncodedBytes"
 output = "0x"
+httpCode = 200
+httpHeaders = {}
 
 [[groups.decode-abi-encoded-bytes.tests]]
 name = "ABI-encoded bytes: Bad ABI-encoding: random data"
@@ -30,6 +34,16 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "decodeABIEncodedBytes"
 error = { label = "Unable to parse contract output", httpCode = 400 }
 
+[[groups.decode-abi-encoded-bytes.tests]]
+name = "ABI-encoded bytes: MIME type is provided"
+contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002fa12000000000000000000000000000000000000000000000000000000000000"
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
+output = "0xfa12"
+httpCode = 200
+httpHeaders = {"Content-Type" = "image/svg+xml"}
+
+
 
 [groups.raw-bytes-json-encoded]
 name = "Raw bytes json encoded"
@@ -40,12 +54,17 @@ name = "JSON encoding of raw bytes: basic"
 contractReturn = "0x5612fa"
 contractReturnProcessing = "jsonEncodeRawBytes"
 outputAsString = "[\"0x5612fa\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
 
 [[groups.raw-bytes-json-encoded.tests]]
 name = "JSON encoding of raw bytes: empty"
 contractReturn = "0x"
 contractReturnProcessing = "jsonEncodeRawBytes"
 outputAsString = "[\"0x\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
+
 
 
 [groups.json-encode-values]
@@ -58,6 +77,8 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "bytes"}]
 outputAsString = "[\"0x42\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: bytes32: In string with 0x prefix"
@@ -65,6 +86,8 @@ contractReturn = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789ab
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "bytes32"}]
 outputAsString = "[\"0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: bytes32: In string"
@@ -72,6 +95,8 @@ contractReturn = "00000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "string"}]
 outputAsString = "[\"ahahah\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: address: In string with 0x prefix"
@@ -79,6 +104,8 @@ contractReturn = "0x000000000000000000000000ca300b47c9e75a2a3a0bd3295137341e809b
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "address"}]
 outputAsString = "[\"0xCa300B47C9E75a2A3a0bd3295137341E809B504E\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: uint256: In string"
@@ -86,6 +113,17 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "uint256"}]
 outputAsString = "[\"42\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
+
+[[groups.json-encode-values.tests]]
+name = "JSON encode values: array"
+contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000002a0000000000000000000000000000000000000000000000000000000000000018"
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "uint256[]"}]
+outputAsString = "[[\"42\",\"24\"]]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: multiple values"
@@ -93,6 +131,8 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "uint256"}, {type = "bytes"}]
 outputAsString = "[\"42\",\"0x42\"]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: No values"
@@ -100,3 +140,5 @@ contractReturn = "0x"
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = []
 outputAsString = "[]"
+httpCode = 200
+httpHeaders = {"Content-Type" = "application/json"}
