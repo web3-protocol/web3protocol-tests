@@ -15,11 +15,35 @@ url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56"
 resolveMode = "auto"
 contractCallMode = "calldata"
 calldata = "0x"
+contractReturnProcessing = "decodeABIEncodedBytes"
 
 [[groups.root.tests]]
 name = "With \"/\" specified"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/"
-error = { label = "Pathname in auto mode is invalid", httpCode = 400 }
+error = { label = "Missing method name", httpCode = 400 }
+
+
+
+[groups.methods]
+name = "Methods"
+standard = "erc-4804"
+
+[[groups.methods.tests]]
+name = "Valid method name"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+
+[[groups.methods.tests]]
+name = "Invalid method name: number in front"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/3tokenHTML"
+error = { label = "Invalid method name", httpCode = 400 }
+
+[[groups.methods.tests]]
+name = "Invalid method name: invalid char"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHT*ML"
+error = { label = "Invalid method name", httpCode = 400 }
 
 
 
@@ -273,8 +297,8 @@ contractCallMode = "method"
 methodName = "tokenSVG"
 methodArgs = [{type = "string"}]
 methodArgValues = [{value = "1"}]
-contractReturnProcessing = "firstValueAsBytes"
-FirstValueAsBytesMimeType = ""
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = ""
 
 [[groups.mime-type.tests]]
 name = "Extension specified"
@@ -284,19 +308,19 @@ contractCallMode = "method"
 methodName = "tokenSVG"
 methodArgs = [{type = "string"}]
 methodArgValues = [{value = "1.svg"}]
-contractReturnProcessing = "firstValueAsBytes"
-FirstValueAsBytesMimeType = "image/svg+xml"
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
 
 [[groups.mime-type.tests]]
-name = "Unknown xtension specified"
+name = "Unknown extension specified"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/string!1.ploua"
 resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenSVG"
 methodArgs = [{type = "string"}]
 methodArgValues = [{value = "1.ploua"}]
-contractReturnProcessing = "firstValueAsBytes"
-FirstValueAsBytesMimeType = ""
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = ""
 
 [[groups.mime-type.tests]]
 name = "Extension specified with multiple args"
@@ -306,66 +330,73 @@ contractCallMode = "method"
 methodName = "tokenSVG"
 methodArgs = [{type = "uint256"}, {type = "string"}]
 methodArgValues = [{value = 31}, {value = "1.svg"}]
-contractReturnProcessing = "firstValueAsBytes"
-FirstValueAsBytesMimeType = "image/svg+xml"
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
 
-# [[groups.mime-type.tests]]
-# name = "Extension specified with no args"
-# url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/token.svg"
-# resolveMode = "auto"
-# contractCallMode = "method"
-# methodName = "tokenSVG"
-# methodArgs = []
-# methodArgValues = []
-# methodReturn = [{type = 'bytes'}]
-# contractReturnProcessing = "firstValueAsBytes"
-# FirstValueAsBytesMimeType = "image/svg+xml"
+[[groups.mime-type.tests]]
+name = "Extension specified with no args"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/token.svg"
+error = { label = "Invalid method name", httpCode = 400 }
+
 
 
 [groups.return-types]
 name = "Return types"
 standard = "erc-4804"
 
-# [[groups.return-types.tests]]
-# name = "No returns"
-# url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1"
-# resolveMode = "auto"
-# contractCallMode = "method"
-# methodName = "tokenHTML"
-# methodArgs = [{type = "uint256"}]
-# methodArgValues = [{value = 1}]
-# methodReturn = [{type = 'bytes'}]
-# contractReturnProcessing = "firstValueAsBytes"
+[[groups.return-types.tests]]
+name = "No ?returns"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 1}]
+contractReturnProcessing = "decodeABIEncodedBytes"
 
 [[groups.return-types.tests]]
-name = "Returns ()"
+name = "?returns=()"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()"
 resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "uint256"}]
 methodArgValues = [{value = 1}]
-methodReturn = [{type = 'bytes32'}]
-contractReturnProcessing = "jsonEncodeValues"
+contractReturnProcessing = "jsonEncodeRawBytes"
 
 [[groups.return-types.tests]]
-name = "Returns with types"
+name = "?returns= twice"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()&returns=()"
+error = { label = "Duplicate return attribute", httpCode = 400 }
+
+[[groups.return-types.tests]]
+name = "?returns= and ?returnTypes="
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()&returnTypes=()"
+error = { label = "Duplicate return attribute", httpCode = 400 }
+
+[[groups.return-types.tests]]
+name = "?returns with types"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,uint256)"
 resolveMode = "auto"
 contractCallMode = "method"
 methodName = "levelAndTile"
 methodArgs = [{type = "uint256"}, {type = "uint256"}]
 methodArgValues = [{value = 2}, {value = 50}]
-methodReturn = [{type = 'uint256'}, {type = 'uint256'}]
 contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256'}, {type = 'uint256'}]
 
 [[groups.return-types.tests]]
-name = "Returns with types: combine with mime type to be ignored"
+name = "?returns with an invalid type"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,abcd)"
+error = { label = "Invalid type: abcd", httpCode = 400 }
+
+[[groups.return-types.tests]]
+name = "?returns with types: file extension in argument to be ignored"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/string!50.svg?returns=(uint256,uint256)"
 resolveMode = "auto"
 contractCallMode = "method"
 methodName = "levelAndTile"
 methodArgs = [{type = "uint256"}, {type = "string"}]
 methodArgValues = [{value = 2}, {value = "50.svg"}]
-methodReturn = [{type = 'uint256'}, {type = 'uint256'}]
 contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256'}, {type = 'uint256'}]

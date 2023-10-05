@@ -111,9 +111,9 @@ standard = "erc-4804"
 [[groups.ens.tests]]
 name = "ENS host"
 url = "web3://uniswap.eth"
-contractAddress = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
 domainNameResolver = "ens"
 domainNameResolverChainId = 1
+contractAddress = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
 
 [[groups.ens.tests]]
 name = "Unregistered ENS name"
@@ -134,10 +134,10 @@ standard = "erc-6821"
 [[groups.ens-extension-erc-6821.tests]]
 name = "ENS host with ERC-6821 chain switching"
 url = "web3://vitalikblog.eth"
-contractAddress = "0xe4ba0e245436b737468c206ab5c8f4950597ab7f"
-chainId = 42170
 domainNameResolver = "ens"
 domainNameResolverChainId = 1
+contractAddress = "0xe4ba0e245436b737468c206ab5c8f4950597ab7f"
+chainId = 42170
 
 
 
