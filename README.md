@@ -30,8 +30,8 @@ Each file contains test groups, and as the first-level contains the ``type`` fie
 ```
 name = "..."
 url = "web3://uniswap.eth"
-domainNameResolver = "ens"
-domainNameResolverChainId = 1 # If domainNameResolver is non empty
+hostDomainNameResolver = "ens"
+hostDomainNameResolverChainId = 1 # If hostDomainNameResolver is non empty
 contractAddress = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
 chainId = 1
 resolveMode = "manual"
@@ -48,11 +48,11 @@ jsonEncodedValueTypes = [{type = 'uint256'}] # if contractReturnProcessing is "j
 In these tests, the input is the ``url`` field only. We are not interested in the smartcontract output, and thus we do not call the smartcontract .
 
 These optional fields represent the expected data we extract after parsing the URL :
-- ``domainNameResolver`` : If any, the domain name resolver used. Possible values are : ``ens``, ``w3ns``.
-  - ``domainNameResolverChainId`` : If a resolver was used, this will contains the chain id of the resolver.
+- ``hostDomainNameResolver`` : If any, the domain name resolver used. Possible values are : ``ens``, ``w3ns``.
+  - ``hostDomainNameResolverChainId`` : If a resolver was used, this will contains the chain id of the resolver.
 - ``contractAddress`` : The address of the smartcontract.
 - ``chainId`` : The id of the chain where the smartcontract is located.
-- ``resolveMode`` : the detected ERC-4804 resolve mode. Possible values are: ``manual``, ``auto``, ``5219``.
+- ``resolveMode`` : the detected ERC-4804 resolve mode. Possible values are: ``manual``, ``auto``, ``resourceRequest``.
 - ``contractCallMode`` : the way we are going to be asked to call the smartcontract. Possible values are: ``method``, ``calldata``. Depending of various factors, we may be asked to call a smartcontract method, or directly some raw calldata. 
   - If ``contractCallMode`` is ``method``, these extra fields will be used:
     - ``methodName`` : the name of the smartcontract method
@@ -66,6 +66,7 @@ These optional fields represent the expected data we extract after parsing the U
   - ``jsonEncodeRawBytes`` : the data returned will be converted into an hexadecimal representation and will be JSON-encoded.
   - ``jsonEncodeValues`` : the data returned is considered to be ABI-encoded values. It will be ABI-decoded and then JSON-encoded. If this value is used, these extra fields will be used : 
     - ``jsonEncodedValueTypes`` : an array of ABI types that will be used to decode the returned data.
+  - ``decodeErc5219Request`` : the data returned will be processed as specified by the ERC-5219 spec.
 
 In case of expected error, the format will be : 
 ```

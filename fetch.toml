@@ -65,3 +65,23 @@ httpHeaders = {"Content-Type" = "application/json"}
 name = "Make a call with a bad method name"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/xxxxxxx"
 error = { label = "The contract returned no data (\"0x\").\n\nThis could be due to any of the following:\n  - The contract does not have the requested function,\n  - The parameters passed to the contract function may be invalid, or\n  - The address is not a contract.", httpCode = 404 }
+
+
+
+[groups.resource-request-mode]
+name = "Fetch resourceRequest mode"
+standard = "erc-6944"
+
+# Todo: Replace with a deployed contract returning a less huge output
+[[groups.resource-request-mode.tests]]
+name = "Call with path and query"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/view/1234?x=1&b=2"
+httpCode = 200
+httpHeaders = {"Content-type" = "text/html"}
+
+[[groups.resource-request-mode.tests]]
+name = "Call returning 404"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/xxxxx"
+outputAsString = ""
+httpCode = 404
+httpHeaders = {}

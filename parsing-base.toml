@@ -102,25 +102,47 @@ error = { label = "Unsupported domain name service suffix: lol", httpCode = 400 
 
 
 [groups.ens]
-name = "ENS"
+name = "ENS domain name service"
 standard = "erc-4804"
 
 [[groups.ens.tests]]
 name = "ENS host"
 url = "web3://uniswap.eth"
-domainNameResolver = "ens"
-domainNameResolverChainId = 1
+hostDomainNameResolver = "ens"
+hostDomainNameResolverChainId = 1
 contractAddress = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
+chainId = 1
 
 [[groups.ens.tests]]
 name = "Unregistered ENS name"
 url = "web3://fsdfzefszfsfsdfsdfefe.eth"
-error = { label = "Cannot resolve domain name", httpCode = 400 }
+error = { label = "Cannot resolve domain name", httpCode = 404 }
 
-# [[groups.ens.tests]]
-# name = "Invalid ENS name"
-# url = "web3://.eth"
-# error = { label = "Cannot resolve domain name", httpCode = 400 }
+[[groups.ens.tests]]
+name = "Empty ENS name"
+url = "web3://.eth"
+error = { label = "Invalid domain name", httpCode = 400 }
+
+[[groups.ens.tests]]
+name = "ENS host on goerli"
+url = "web3://uniswap.eth:5"
+hostDomainNameResolver = "ens"
+hostDomainNameResolverChainId = 5
+contractAddress = "0xD5AD8f4ccEa99855686A53b61ea4D57FE6473B6D"
+chainId = 5
+
+
+[groups.w3ns]
+name = "W3NS domain name service"
+standard = "erc-4804"
+
+[[groups.w3ns.tests]]
+name = "W3q host on testnet"
+url = "web3://quark.w3q:3334"
+hostDomainNameResolver = "w3ns"
+hostDomainNameResolverChainId = 3334
+contractAddress = "0xc934D34DF21dE61A62b3D12E929b65D0bCfaf8b9"
+chainId = 3334
 
 
 
@@ -131,8 +153,8 @@ standard = "erc-6821"
 [[groups.ens-extension-erc-6821.tests]]
 name = "ENS host with ERC-6821 chain switching"
 url = "web3://vitalikblog.eth"
-domainNameResolver = "ens"
-domainNameResolverChainId = 1
+hostDomainNameResolver = "ens"
+hostDomainNameResolverChainId = 1
 contractAddress = "0xe4ba0e245436b737468c206ab5c8f4950597ab7f"
 chainId = 42170
 

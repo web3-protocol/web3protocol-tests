@@ -1,0 +1,98 @@
+name = "Parsing ERC-6944 / ERC-5219 resource request mode URLs"
+type = "urlParsing"
+
+[groups.root]
+name = "Root directory"
+standard = "erc-6944"
+
+[[groups.root.tests]]
+name = "Without \"/\" specified"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = []}, {value=[]}]
+
+[[groups.root.tests]]
+name = "With \"/\" specified"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = []}, {value=[]}]
+
+
+
+[groups.requests]
+name = "Basic requests"
+standard = "erc-6944"
+
+[[groups.requests.tests]]
+name = "Path only"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/view/1234"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = ["view", "1234"]}, {value = []}]
+
+[[groups.requests.tests]]
+name = "Path and params"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/view/1234?x=1&y=2"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = ["view", "1234"]}, {value = [["x", "1"], ["y", "2"]]}]
+
+[[groups.requests.tests]]
+name = "Params only"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/?x=1&y=2"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = []}, {value = [["x", "1"], ["y", "2"]]}]
+
+[[groups.requests.tests]]
+name = "Params only with no \"/\""
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656?x=1&y=2"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = []}, {value = [["x", "1"], ["y", "2"]]}]
+
+[[groups.requests.tests]]
+name = "Path with URI-percent-encoding of special chars: !/?%"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/%21%2F%3F%25"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = ["!/?%"]}, {value = []}]
+
+[[groups.requests.tests]]
+name = "Path with URI-percent-encoding of utf-8 chars"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/%F0%9F%99%82"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = ["🙂"]}, {value = []}]
+
+[[groups.requests.tests]]
+name = "Path with invalud URI-percent-encoding"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/%AG%A1"
+error = { label = "Unable to URI-percent decode: %AG%A1", httpCode = 400 }
+
+[[groups.requests.tests]]
+name = "Params with URI-percent-encoding of utf-8 chars"
+url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/?smiley=%F0%9F%99%82"
+resolveMode = "resourceRequest"
+contractCallMode = "method"
+methodName = "request"
+methodArgs = [{type = "string[]"}, {type = "(string,string)[]"}]
+methodArgValues = [{value = []}, {value = [["smiley", "🙂"]]}]
