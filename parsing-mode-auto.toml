@@ -115,7 +115,7 @@ methodArgValues = [{value = "0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c
 [[groups.argument-bytes32.tests]]
 name = "Bad value"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes32!0x59f7"
-error = { label = "Argument is not a valid hex string: 0x59f7", httpCode = 400 }
+error = { label = "Argument has not the correct length: 0x59f7", httpCode = 400 }
 
 [[groups.argument-bytes32.tests]]
 name = "Bad hexadecimal"
@@ -255,6 +255,196 @@ contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "string"}]
 methodArgValues = [{value = "0xcEe284F754E854890e311e3280b767F80797180d"}]
+
+
+
+# ERC+6860 add support for uint and all uint<X>
+[groups.argument-uint]
+name = "uint and uint <X> argument types"
+standards = ["ERC-6860"]
+
+[[groups.argument-uint.tests]]
+name = "Type specified: uint (alias of uint256)"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-uint.tests]]
+name = "Type specified: uint8"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint8!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint8"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-uint.tests]]
+name = "Type specified: uint16"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint16!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint16"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-uint.tests]]
+name = "Type specified: uint248"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint248!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint248"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-uint.tests]]
+name = "Bad type specified: uint7"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint7!1"
+error = { label = "Invalid argument type: uint7", httpCode = 400 }
+
+[[groups.argument-uint.tests]]
+name = "Bad type specified: uint255"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint255!1"
+error = { label = "Invalid argument type: uint255", httpCode = 400 }
+
+[[groups.argument-uint.tests]]
+name = "Bad type specified: uint264"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/uint264!1"
+error = { label = "Invalid argument type: uint264", httpCode = 400 }
+
+
+
+# ERC+6860 add support for int and all int<X>
+[groups.argument-int]
+name = "int and int<X> argument types"
+standards = ["ERC-6860"]
+
+[[groups.argument-uint.tests]]
+name = "Type specified: int (alias of int256)"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "int256"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-int.tests]]
+name = "Type specified: int8"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int8!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "int8"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-int.tests]]
+name = "Type specified: int16"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int16!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "int16"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-int.tests]]
+name = "Type specified: int248"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int248!1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "int248"}]
+methodArgValues = [{value = 1}]
+
+[[groups.argument-int.tests]]
+name = "Bad type specified: int7"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int7!1"
+error = { label = "Invalid argument type: int7", httpCode = 400 }
+
+[[groups.argument-int.tests]]
+name = "Bad type specified: int255"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int255!1"
+error = { label = "Invalid argument type: int255", httpCode = 400 }
+
+[[groups.argument-int.tests]]
+name = "Bad type specified: int264"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int264!1"
+error = { label = "Invalid argument type: int264", httpCode = 400 }
+
+[[groups.argument-int.tests]]
+name = "Negative value allowed"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/int256!-1"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "int256"}]
+methodArgValues = [{value = -1}]
+
+
+
+# ERC+6860 add support for all bytes<X>
+[groups.argument-bytesx]
+name = "bytes<X> argument types"
+standards = ["ERC-6860"]
+
+[[groups.argument-bytesx.tests]]
+name = "Type specified: bytes1"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes1!0x01"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bytes1"}]
+methodArgValues = [{value = "0x0000000000000000000000000000000000000000000000000000000000000001"}]
+
+[[groups.argument-bytesx.tests]]
+name = "Type specified: bytes1"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes31!0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f4"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bytes31"}]
+methodArgValues = [{value = "0x0059f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f4"}]
+
+[[groups.argument-bytesx.tests]]
+name = "Bad type specified: bytes33"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes33!0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f4ad"
+error = { label = "Invalid argument type: bytes33", httpCode = 400 }
+
+[[groups.argument-bytesx.tests]]
+name = "Bad data length with bytes1"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes1!0x0001"
+error = { label = "Argument has not the correct length: 0x0001", httpCode = 400 }
+
+
+
+# ERC+6860 add support for bool
+[groups.argument-bool]
+name = "bool argument type"
+standards = ["ERC-6860"]
+
+[[groups.argument-bool.tests]]
+name = "Type specified, with true value"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bool!true"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bool"}]
+methodArgValues = [{value = true}]
+
+[[groups.argument-bool.tests]]
+name = "Type specified, with false value"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bool!false"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bool"}]
+methodArgValues = [{value = false}]
+
+[[groups.argument-bool.tests]]
+name = "Bad value"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bool!1"
+error = { label = "Argument must be 'true' or 'false'", httpCode = 400 }
 
 
 
