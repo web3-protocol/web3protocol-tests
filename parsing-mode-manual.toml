@@ -1,10 +1,10 @@
-name = "Parsing ERC-4804 manual mode URLs"
+name = "Parsing manual mode URLs"
 type = "urlParsing"
 
 
 [groups.root]
 name = "Root directory"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.root.tests]]
 name = "Without \"/\" specified"
@@ -27,7 +27,7 @@ decodedABIEncodedBytesMimeType = "text/html"
 
 [groups.paths]
 name = "Paths"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.paths.tests]]
 name = "Simple path"

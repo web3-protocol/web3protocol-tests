@@ -11,7 +11,7 @@ type = "fetch"
 
 [groups.manual-mode]
 name = "Fetch manual mode"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.manual-mode.tests]]
 name = "Make a basic call"
@@ -31,7 +31,7 @@ httpHeaders = {"Content-Type" = "image/svg+xml"}
 
 [groups.auto-mode]
 name = "Fetch auto mode"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.auto-mode.tests]]
 name = "Make a call without ?returns"
@@ -70,7 +70,7 @@ error = { label = "The contract returned no data (\"0x\").\n\nThis could be due 
 
 [groups.resource-request-mode]
 name = "Fetch resourceRequest mode"
-standard = "erc-6944"
+standards = ["ERC-6944"]
 
 # Todo: Replace with a deployed contract returning a less huge output
 [[groups.resource-request-mode.tests]]

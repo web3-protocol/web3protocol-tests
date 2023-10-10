@@ -1,10 +1,10 @@
-name = "Parsing ERC-4804 auto mode URLs"
+name = "Parsing auto mode URLs"
 type = "urlParsing"
 
 
 [groups.root]
 name = "Root directory"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.root.tests]]
 name = "Without \"/\" specified"
@@ -23,7 +23,7 @@ error = { label = "Missing method name", httpCode = 400 }
 
 [groups.methods]
 name = "Methods"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.methods.tests]]
 name = "Valid method name"
@@ -46,7 +46,7 @@ error = { label = "Invalid method name", httpCode = 400 }
 
 [groups.argument-types]
 name = "Argument types"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.argument-types.tests]]
 name = "Non existing type"
@@ -57,7 +57,7 @@ error = { label = "Unknown type: xoxo", httpCode = 400 }
 
 [groups.argument-uint256]
 name = "uint256 argument handling"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.argument-uint256.tests]]
 name = "Type specified"
@@ -101,7 +101,7 @@ error = { label = "Number is negative: -1", httpCode = 400 }
 
 [groups.argument-bytes32]
 name = "bytes32 argument handling"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.argument-bytes32.tests]]
 name = "Type specified"
@@ -135,7 +135,7 @@ methodArgValues = [{value = "0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c
 
 [groups.argument-address]
 name = "address argument handling"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.argument-address.tests]]
 name = "Type specified"
@@ -179,7 +179,7 @@ error = { label = "Unsupported domain name suffix: abcd", httpCode = 400 }
 
 [groups.argument-bytes]
 name = "bytes argument handling"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.argument-bytes.tests]]
 name = "Type specified"
@@ -218,7 +218,7 @@ methodArgValues = [{value = "0x4578457f"}]
 
 [groups.argument-string]
 name = "string argument handling"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.argument-string.tests]]
 name = "Base"
@@ -260,7 +260,7 @@ methodArgValues = [{value = "0xcEe284F754E854890e311e3280b767F80797180d"}]
 
 [groups.argument-multiple]
 name = "Multiple arguments"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.argument-multiple.tests]]
 name = "Specified types"
@@ -284,7 +284,7 @@ methodArgValues = [{value = 1234}, {value = "0x1a9C8182C09F50C8318d769245beA52c3
 
 [groups.mime-type]
 name = "MIME Type handling"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.mime-type.tests]]
 name = "No extension specified"
@@ -339,7 +339,7 @@ error = { label = "Invalid method name", httpCode = 400 }
 
 [groups.return-types]
 name = "Return types"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.return-types.tests]]
 name = "No ?returns"

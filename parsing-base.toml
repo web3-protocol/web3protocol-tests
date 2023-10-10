@@ -1,20 +1,15 @@
-name = "Parsing ERC-4804 URLs"
+name = "Parsing URLs"
 type = "urlParsing"
 
 
 [groups.basic-format]
-name = "Basic errors"
-standard = "erc-4804"
+name = "Basic format"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.basic-format.tests]]
 name = "Random noise"
 url = "x!2dffsdk42"
 error = { label = "Invalid URL format", httpCode = 400 }
-
-[[groups.basic-format.tests]]
-name = "Bad protocol name"
-url = "web4://xxxx/xxxx"
-error = { label = "Protocol name is invalid", httpCode = 400 }
 
 [[groups.basic-format.tests]]
 name = "Missing hostname"
@@ -31,11 +26,70 @@ name = "Missing hostname 3"
 url = "web3://:1/xxx"
 error = { label = "Invalid URL format", httpCode = 400 }
 
+[[groups.basic-format.tests]]
+name = "Non-ASCII included in URL"
+url = "web3://💚/💚💚"
+error = { label = "URL is invalid, contains non-ASCII characters", httpCode = 400 }
+
+
+
+[groups.protocol-names]
+name = "Protocol names"
+standards = ["ERC-4804", "ERC-6860"]
+
+[[groups.protocol-names.tests]]
+name = "Bad protocol name"
+url = "web4://xxxx/xxxx"
+error = { label = "Protocol name is invalid", httpCode = 400 }
+
+[[groups.protocol-names.tests]]
+name = "web3 protocol name"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+# No error
+
+[[groups.protocol-names.tests]]
+name = "w3 protocol name 2"
+url = "w3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+# No error
+
+
+
+[groups.protocol-names-erc-4804]
+name = "Protocol names (ERC-4804)"
+standards = ["ERC-4804"]
+
+[[groups.protocol-names-erc-4804.tests]]
+name = "web3 protocol name 3"
+url = "ethereum-web3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+# No error
+
+[[groups.protocol-names-erc-4804.tests]]
+name = "web3 protocol name 4"
+url = "eth-web3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+# No error
+
+
+
+# In ERC-6860, "ethereum-web3://" and "eth-web3://" are no longer supported
+[groups.protocol-names-erc-6860]
+name = "Protocol names (ERC-6860)"
+standards = ["ERC-6860"]
+
+[[groups.protocol-names-erc-6860.tests]]
+name = "Bad protocol name 2"
+url = "ethereum-web3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+error = { label = "Protocol name is invalid", httpCode = 400 }
+
+[[groups.protocol-names-erc-6860.tests]]
+name = "Bad protocol name 3"
+url = "eth-web3://0x5a985f13345e820aa9618826b85f74c3986e1463"
+error = { label = "Protocol name is invalid", httpCode = 400 }
+
 
 
 [groups.address-hosts]
 name = "Address hosts"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.address-hosts.tests]]
 name = "Ethereum address"
@@ -56,7 +110,7 @@ error = { label = "Invalid contract address", httpCode = 400 }
 
 [groups.chain-id]
 name = "Chain id"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.chain-id.tests]]
 name = "Default chain"
@@ -92,7 +146,7 @@ error = { label = "Invalid URL format", httpCode = 400 }
 
 [groups.domain-names]
 name = "Domain names"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.domain-names.tests]]
 name = "Unsupported domain service"
@@ -103,7 +157,7 @@ error = { label = "Unsupported domain name service suffix: lol", httpCode = 400 
 
 [groups.ens]
 name = "ENS domain name service"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.ens.tests]]
 name = "ENS host"
@@ -134,7 +188,7 @@ chainId = 5
 
 [groups.w3ns]
 name = "W3NS domain name service"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.w3ns.tests]]
 name = "W3q host on testnet"
@@ -148,7 +202,7 @@ chainId = 3334
 
 [groups.ens-extension-erc-6821]
 name = "ENS ERC-6821 extension"
-standard = "erc-6821"
+standards = ["ERC-6821"]
 
 [[groups.ens-extension-erc-6821.tests]]
 name = "ENS host with ERC-6821 chain switching"
@@ -162,7 +216,7 @@ chainId = 42170
 
 [groups.resolve-modes]
 name = "Resolve modes"
-standard = "erc-4804"
+standards = ["ERC-4804", "ERC-6860"]
 
 [[groups.resolve-modes.tests]]
 name = "Auto resolve mode"
@@ -178,7 +232,7 @@ resolveMode = "manual"
 
 [groups.resolve-modes-extension-erc-6944]
 name = "Resolve modes"
-standard = "erc-6944"
+standards = ["ERC-6944"]
 
 [[groups.resolve-modes-extension-erc-6944.tests]]
 name = "Auto resolve mode"

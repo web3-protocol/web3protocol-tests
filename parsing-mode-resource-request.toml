@@ -3,7 +3,7 @@ type = "urlParsing"
 
 [groups.root]
 name = "Root directory"
-standard = "erc-6944"
+standards = ["ERC-6944"]
 
 [[groups.root.tests]]
 name = "Without \"/\" specified"
@@ -27,7 +27,7 @@ methodArgValues = [{value = []}, {value=[]}]
 
 [groups.requests]
 name = "Basic requests"
-standard = "erc-6944"
+standards = ["ERC-6944"]
 
 [[groups.requests.tests]]
 name = "Path only"
