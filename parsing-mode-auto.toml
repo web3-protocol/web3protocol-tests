@@ -471,6 +471,37 @@ methodArgs = [{type = "uint256"}, {type = "address"}, {type = "bytes"}]
 methodArgValues = [{value = 1234}, {value = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"}, {value = "0xabcdef"}]
 
 
+[groups.argument-percent-encoding]
+name = "Argument percent encoding"
+standards = ["ERC-4804", "ERC-6860"]
+
+[[groups.argument-percent-encoding.tests]]
+name = "Percent encoding of value"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string!%e5%b8%81"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "币"}]
+
+[[groups.argument-percent-encoding.tests]]
+name = "Percent encoding of value with ! inside"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string!a%21b"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "a!b"}]
+
+[[groups.argument-percent-encoding.tests]]
+name = "Percent encoding of separator and value"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/string%21a%21b"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "a!b"}]
+
 
 [groups.mime-type]
 name = "MIME Type handling"
