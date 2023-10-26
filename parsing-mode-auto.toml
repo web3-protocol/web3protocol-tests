@@ -558,6 +558,111 @@ error = { label = "Invalid method name", httpCode = 400 }
 
 
 
+[groups.mime-type-override]
+name = "MIME type override"
+standards = ["ERC-7087"]
+
+[[groups.mime-type-override.tests]]
+name = "mime.content"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/31?mime.content=image/svg%2Bxml"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 31}]
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
+
+[[groups.mime-type-override.tests]]
+name = "mime.type"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/31?mime.type=svg"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 31}]
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
+
+[[groups.mime-type-override.tests]]
+name = "Use of several mime.type : last one used"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/31?mime.type=html&mime.type=svg"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 31}]
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
+
+[[groups.mime-type-override.tests]]
+name = "Use of mime.type and mime.content : last one used"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/31?mime.content=text/html&mime.type=svg"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 31}]
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
+
+[[groups.mime-type-override.tests]]
+name = "mime.type if ?returns= is present: ignored"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/31?returns=()&mime.type=svg"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 31}]
+contractReturnProcessing = "jsonEncodeRawBytes"
+decodedABIEncodedBytesMimeType = ""
+
+[[groups.mime-type-override.tests]]
+name = "mime.content if ?returns= is present: ignored"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/31?returns=()&mime.content=image/png"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 31}]
+contractReturnProcessing = "jsonEncodeRawBytes"
+decodedABIEncodedBytesMimeType = ""
+
+[[groups.mime-type-override.tests]]
+name = "mime.type present: file extension of last argument ignored"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/string!31.svg?mime.type=png"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "31.svg"}]
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/png"
+
+[[groups.mime-type-override.tests]]
+name = "mime.content present: file extension of last argument ignored"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/string!31.svg?mime.content=image/png"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "31.svg"}]
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/png"
+
+[[groups.mime-type-override.tests]]
+name = "mime.type present: ignored if cannot be found"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/string!31.svg?mime.type=foo"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenSVG"
+methodArgs = [{type = "string"}]
+methodArgValues = [{value = "31.svg"}]
+contractReturnProcessing = "decodeABIEncodedBytes"
+decodedABIEncodedBytesMimeType = "image/svg+xml"
+
+
+
 [groups.return-types]
 name = "Return types"
 standards = ["ERC-4804", "ERC-6860"]
@@ -583,14 +688,14 @@ methodArgValues = [{value = 1}]
 contractReturnProcessing = "jsonEncodeRawBytes"
 
 [[groups.return-types.tests]]
-name = "?returns= twice"
-url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()&returns=()"
-error = { label = "Duplicate return attribute", httpCode = 400 }
-
-[[groups.return-types.tests]]
-name = "?returns= and ?returnTypes="
-url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()&returnTypes=()"
-error = { label = "Duplicate return attribute", httpCode = 400 }
+name = "?returnTypes=()"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returnTypes=()"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "uint256"}]
+methodArgValues = [{value = 1}]
+contractReturnProcessing = "jsonEncodeRawBytes"
 
 [[groups.return-types.tests]]
 name = "?returns with one type"
@@ -600,6 +705,28 @@ contractCallMode = "method"
 methodName = "levelAndTile"
 methodArgs = [{type = "uint256"}, {type = "uint256"}]
 methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256'}]
+
+[[groups.return-types.tests]]
+name = "?returns= twice: Last taken"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()&returns=(uint256)"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = []
+methodArgValues = []
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256'}]
+
+[[groups.return-types.tests]]
+name = "?returns= and ?returnTypes=: Last taken"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/1?returns=()&returnTypes=(uint256)"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = []
+methodArgValues = []
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = 'uint256'}]
 
