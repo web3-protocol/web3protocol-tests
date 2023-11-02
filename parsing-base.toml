@@ -235,6 +235,6 @@ name = "Resolve modes"
 standards = ["ERC-6944"]
 
 [[groups.resolve-modes-extension-erc-6944.tests]]
-name = "Auto resolve mode"
+name = "Resource request resolve mode"
 url = "web3://0x2b51a751d3c7d3554e28dc72c3b032e5f56aa656"
 resolveMode = "resourceRequest"

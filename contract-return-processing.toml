@@ -41,7 +41,7 @@ contractReturnProcessing = "decodeABIEncodedBytes"
 decodedABIEncodedBytesMimeType = "image/svg+xml"
 output = "0xfa12"
 httpCode = 200
-httpHeaders = {"Content-Type" = "image/svg+xml"}
+httpHeaders = { Content-Type = "image/svg+xml" }
 
 
 
@@ -55,7 +55,7 @@ contractReturn = "0x5612fa"
 contractReturnProcessing = "jsonEncodeRawBytes"
 outputAsString = "[\"0x5612fa\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.raw-bytes-json-encoded.tests]]
 name = "JSON encoding of raw bytes: empty"
@@ -63,7 +63,7 @@ contractReturn = "0x"
 contractReturnProcessing = "jsonEncodeRawBytes"
 outputAsString = "[\"0x\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 
 
@@ -78,7 +78,7 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "bytes"}]
 outputAsString = "[\"0x42\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: bytes32: In string with 0x prefix"
@@ -87,16 +87,16 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "bytes32"}]
 outputAsString = "[\"0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: bytes32: In string"
-contractReturn = "000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000066168616861680000000000000000000000000000000000000000000000000000"
+contractReturn = "0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000066168616861680000000000000000000000000000000000000000000000000000"
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "string"}]
 outputAsString = "[\"ahahah\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: address: In string with 0x prefix"
@@ -105,25 +105,25 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "address"}]
 outputAsString = "[\"0xCa300B47C9E75a2A3a0bd3295137341E809B504E\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: array"
-contractReturn = "00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000006616861686168000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000066268626862680000000000000000000000000000000000000000000000000000"
+contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000006616861686168000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000066268626862680000000000000000000000000000000000000000000000000000"
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "string[]"}]
 outputAsString = "[[\"ahahah\",\"bhbhbh\"]]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: multiple values"
-contractReturn = "000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000006616861686168000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014200000000000000000000000000000000000000000000000000000000000000"
+contractReturn = "0x000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000006616861686168000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014200000000000000000000000000000000000000000000000000000000000000"
 contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "string"}, {type = "bytes"}]
 outputAsString = "[\"ahahah\",\"0x42\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values.tests]]
 name = "JSON encode values: No values"
@@ -132,7 +132,7 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = []
 outputAsString = "[]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 
 
@@ -148,7 +148,7 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "uint256"}]
 outputAsString = "[\"42\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 
 
@@ -164,7 +164,7 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "uint256"}]
 outputAsString = "[\"0x2a\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values-erc-6860.tests]]
 name = "JSON encode values: uint256: In string hex encoded, no leading zero"
@@ -173,7 +173,7 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "uint256"}]
 outputAsString = "[\"0x15e\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 [[groups.json-encode-values-erc-6860.tests]]
 name = "JSON encode values: uint256: In string hex encoded, 0 is 0x0"
@@ -182,7 +182,7 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = "uint256"}]
 outputAsString = "[\"0x0\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = { Content-Type = "application/json"}
 
 
 
@@ -196,7 +196,7 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "decodeErc5219Request"
 outputAsString = "<html><body>Hello</body></html>"
 httpCode = 200
-httpHeaders = {"Content-type" = "text/html"}
+httpHeaders = {Content-type = "text/html"}
 
 [[groups.decode-erc5219-request.tests]]
 name = "Sample json return with 2 headers"
@@ -204,7 +204,7 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "decodeErc5219Request"
 outputAsString = "[42]"
 httpCode = 200
-httpHeaders = {"Content-type" = "application/json", "X-test" = "xxx"}
+httpHeaders = {Content-type = "application/json", X-test = "xxx"}
 
 [[groups.decode-erc5219-request.tests]]
 name = "Sample 404 html"
@@ -212,7 +212,7 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "decodeErc5219Request"
 outputAsString = "<html><body>404</body></html>"
 httpCode = 404
-httpHeaders = {"Content-type" = "text/html"}
+httpHeaders = {Content-type = "text/html"}
 
 [[groups.decode-erc5219-request.tests]]
 name = "Binary PNG file"
@@ -220,7 +220,7 @@ contractReturn = "0x000000000000000000000000000000000000000000000000000000000000
 contractReturnProcessing = "decodeErc5219Request"
 output = "0x89504e470d0a1a0a0000000d494844520000010000000100010300000066bc3a2500000003504c5445aad3dfcfecbcf50000001f494441546881edc1010d000000c2a0f74f6d0e37a00000000000000000be0d210000019a60e1d50000000049454e44ae426082"
 httpCode = 200
-httpHeaders = {"Content-type" = "image/png"}
+httpHeaders = {Content-type = "image/png"}
 
 [[groups.decode-erc5219-request.tests]]
 name = "Random binary data with leading and trailing zeroes"
@@ -232,7 +232,7 @@ httpHeaders = {}
 
 [[groups.decode-erc5219-request.tests]]
 name = "Empty data"
-contractReturn = "00000000000000000000000000000000000000000000000000000000000000c80000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+contractReturn = "0x00000000000000000000000000000000000000000000000000000000000000c80000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 contractReturnProcessing = "decodeErc5219Request"
 output = "0x"
 httpCode = 200
@@ -240,7 +240,7 @@ httpHeaders = {}
 
 [[groups.decode-erc5219-request.tests]]
 name = "Invalid ABI return arguments (1 instead of 3)"
-contractReturn = "0000000000000000000000000000000000000000000000000000000000000015"
+contractReturn = "0x0000000000000000000000000000000000000000000000000000000000000015"
 contractReturnProcessing = "decodeErc5219Request"
 error = { label = "Unable to parse contract output", httpCode = 400 }
 
