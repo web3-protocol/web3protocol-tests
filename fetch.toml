@@ -18,14 +18,14 @@ name = "Make a basic call"
 url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543/lalala"
 outputAsString = "404"
 httpCode = 200
-httpHeaders = {"Content-Type" = "text/html"}
+httpHeaders = {Content-Type = "text/html"}
 
 [[groups.manual-mode.tests]]
 name = "Make a basic call, with mime casting"
 url = "web3://0x9A595bc28F1c40ab96247E8157A2b0A6762E7543/lalala.svg"
 outputAsString = "404"
 httpCode = 200
-httpHeaders = {"Content-Type" = "image/svg+xml"}
+httpHeaders = {Content-Type = "image/svg+xml"}
 
 
 
@@ -57,21 +57,21 @@ name = "Make a call with ?returns fetching 2 numbers"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,uint256)"
 outputAsString = "[\"1\",\"36\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = {Content-type = "application/json"}
 
 [[groups.auto-mode-erc-4840.tests]]
 name = "Make a call with ?returns fetching 2 numbers on goerli"
 url = "web3://0x76010876050387FA66E28a1883aD73d576D88Bf2:5/levelAndTile/2/50?returns=(uint256,uint256)"
 outputAsString = "[\"1\",\"36\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = {Content-type = "application/json"}
 
 [[groups.auto-mode-erc-4840.tests]]
 name = "Make a call with ?returns fetching an array of numbers on web3Q galileo"
 url = "web3://0x8a7297d333b0243c766029ac31a712eef6451846:3334/getValue?returns=(uint256[])"
 outputAsString = "[[\"1456\",\"1235\",\"8673\"]]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = {Content-type = "application/json"}
 
 
 
@@ -85,21 +85,21 @@ name = "Make a call with ?returns fetching 2 numbers"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,uint256)"
 outputAsString = "[\"0x1\",\"0x24\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = {Content-Type = "application/json"}
 
 [[groups.auto-mode-erc-6860.tests]]
 name = "Make a call with ?returns fetching 2 numbers on goerli"
 url = "web3://0x76010876050387FA66E28a1883aD73d576D88Bf2:5/levelAndTile/2/50?returns=(uint256,uint256)"
 outputAsString = "[\"0x1\",\"0x24\"]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = {Content-Type = "application/json"}
 
 [[groups.auto-mode-erc-6860.tests]]
 name = "Make a call with ?returns fetching an array of numbers on web3Q galileo"
 url = "web3://0x8a7297d333b0243c766029ac31a712eef6451846:3334/getValue?returns=(uint256[])"
 outputAsString = "[[\"0x5b0\",\"0x4d3\",\"0x21e1\"]]"
 httpCode = 200
-httpHeaders = {"Content-Type" = "application/json"}
+httpHeaders = {Content-Type = "application/json"}
 
 
 
@@ -113,7 +113,7 @@ standards = ["ERC-6944"]
 name = "Call with path and query"
 url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/view/1234?x=1&b=2"
 httpCode = 200
-httpHeaders = {"Content-type" = "text/html"}
+httpHeaders = {Content-type = "text/html"}
 
 [[groups.resource-request-mode.tests]]
 name = "Call returning 404"
