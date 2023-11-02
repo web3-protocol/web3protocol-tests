@@ -98,7 +98,7 @@ methodArgValues = [{value = 1}]
 [[groups.argument-uint256.tests]]
 name = "Autodetection: Bad value (negative number)"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/-1"
-error = { label = "Cannot resolve domain name", httpCode = 400 }
+error = { label = "Unrecognized domain name", httpCode = 400 }
 
 
 
@@ -152,12 +152,12 @@ methodArgValues = [{value = "0xcEe284F754E854890e311e3280b767F80797180d"}]
 [[groups.argument-address.tests]]
 name = "Bad value : bad hexadecimal"
 url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!0xcEe284F754E854890e311e3280b767F80797180g"
-error = { label = "Unrecognized address", httpCode = 400 }
+error = { label = "Unrecognized domain name", httpCode = 400 }
 
 [[groups.argument-address.tests]]
 name = "Bad value : invalid length"
 url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!0xcEe284F754E854890e311e3280b767F80797180da"
-error = { label = "Unrecognized address", httpCode = 400 }
+error = { label = "Unrecognized domain name", httpCode = 400 }
 
 [[groups.argument-address.tests]]
 name = "Type specified, domain name version"
