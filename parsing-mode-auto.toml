@@ -426,16 +426,16 @@ resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "bytes1"}]
-methodArgValues = [{value = "0x0000000000000000000000000000000000000000000000000000000000000001"}]
+methodArgValues = [{value = "0x01"}]
 
 [[groups.argument-bytesx.tests]]
-name = "Type specified: bytes1"
+name = "Type specified: bytes31"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bytes31!0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f4"
 resolveMode = "auto"
 contractCallMode = "method"
 methodName = "tokenHTML"
 methodArgs = [{type = "bytes31"}]
-methodArgValues = [{value = "0x0059f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f4"}]
+methodArgValues = [{value = "0x59f71cd7bbfece3b03f2545253083c3c4da78a52913390a9c05c13ccc013f4"}]
 
 [[groups.argument-bytesx.tests]]
 name = "Bad type specified: bytes33"
