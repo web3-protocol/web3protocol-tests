@@ -101,6 +101,12 @@ outputAsString = "[[\"0x5b0\",\"0x4d3\",\"0x21e1\"]]"
 httpCode = 200
 httpHeaders = {Content-Type = "application/json"}
 
+[[groups.auto-mode-erc-6860.tests]]
+name = "Make a call with ?returns fetching a tuple"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSupplementalData/2?returns=((uint,uint,uint,uint,int,int,int,int,string,string[10],string[9]))"
+outputAsString = "[[\"0x0\",\"0x7\",\"0x14\",\"0xe\",\"0x0\",\"0x676c00\",\"0x5407c0\",\"0x9e6d92\",\"Jadeite\",[\"#5f9644\",\"#5f9644\",\"#32523a\",\"#c4a675\",\"#c4a675\",\"#c4a675\",\"#7bb03e\",\"#cad795\",\"#cad795\",\"#e2dfd4\"],[\"⌬\",\"༼\",\"༼\",\"༼\",\"༼\",\"༼\",\"༼\",\"༼\",\"⌬\"]]]"
+httpCode = 200
+httpHeaders = {Content-Type = "application/json"}
 
 
 

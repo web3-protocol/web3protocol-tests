@@ -668,6 +668,72 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = 'uint256[]'}]
 
 [[groups.return-types.tests]]
+name = "?returns with one fixed-size array of a type"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256[2])"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256[2]'}]
+
+[[groups.return-types.tests]]
+name = "?returns with one tuple"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=((string,uint256))"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "tuple", components = [{type = "string"}, {type = "uint256"}]}]
+
+[[groups.return-types.tests]]
+name = "?returns with one tuple containing a tuple"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(((string,uint256)))"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "tuple", components = [{type = "tuple", components = [{type = "string"}, {type = "uint256"}]}]}]
+
+[[groups.return-types.tests]]
+name = "?returns with one array of tuple"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=((string,uint256)[])"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "tuple[]", components = [{type = "string"}, {type = "uint256"}]}]
+
+[[groups.return-types.tests]]
+name = "?returns with one fixed-size array of tuple"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=((string,uint256)[2])"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "tuple[2]", components = [{type = "string"}, {type = "uint256"}]}]
+
+[[groups.return-types.tests]]
+name = "?returns with one tuple of an array of tuple"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(((string,uint256)[]))"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = "tuple", components = [{type = "tuple[]", components = [{type = "string"}, {type = "uint256"}]}]}]
+
+[[groups.return-types.tests]]
 name = "?returns with multiple types"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,uint256,bytes)"
 resolveMode = "auto"
@@ -679,9 +745,25 @@ contractReturnProcessing = "jsonEncodeValues"
 jsonEncodedValueTypes = [{type = 'uint256'}, {type = 'uint256'}, {type = 'bytes'}]
 
 [[groups.return-types.tests]]
+name = "?returns with multiple types, arrays and typles"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,(uint256,(bytes,string)[4]),string[])"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "levelAndTile"
+methodArgs = [{type = "uint256"}, {type = "uint256"}]
+methodArgValues = [{value = 2}, {value = 50}]
+contractReturnProcessing = "jsonEncodeValues"
+jsonEncodedValueTypes = [{type = 'uint256'}, {type = "tuple", components = [{type = "uint256"}, {type = "tuple[4]", components = [{type = "bytes"}, {type = "string"}]}]}, {type = 'string[]'}]
+
+[[groups.return-types.tests]]
 name = "?returns with an invalid type"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,abcd)"
 error = { label = "Invalid type: abcd", httpCode = 400 }
+
+[[groups.return-types.tests]]
+name = "?returns with an invalid empty type"
+url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,)"
+error = { label = "Missing type", httpCode = 400 }
 
 [[groups.return-types.tests]]
 name = "?returns with types: file extension in argument to be ignored"
