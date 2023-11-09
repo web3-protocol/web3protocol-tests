@@ -758,12 +758,12 @@ jsonEncodedValueTypes = [{type = 'uint256'}, {type = "tuple", components = [{typ
 [[groups.return-types.tests]]
 name = "?returns with an invalid type"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,abcd)"
-error = { label = "Invalid type: abcd", httpCode = 400 }
+error = { label = "Return attribute: Invalid type: abcd", httpCode = 400 }
 
 [[groups.return-types.tests]]
 name = "?returns with an invalid empty type"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/levelAndTile/2/50?returns=(uint256,)"
-error = { label = "Missing type", httpCode = 400 }
+error = { label = "Return attribute: missing type", httpCode = 400 }
 
 [[groups.return-types.tests]]
 name = "?returns with types: file extension in argument to be ignored"
