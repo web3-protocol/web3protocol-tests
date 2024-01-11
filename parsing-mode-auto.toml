@@ -477,6 +477,24 @@ name = "Bad value"
 url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/bool!1"
 error = { label = "Argument must be 'true' or 'false'", httpCode = 400 }
 
+[[groups.argument-bool.tests]]
+name = "Autodetection: true"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/true"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bool"}]
+methodArgValues = [{value = true}]
+
+[[groups.argument-bool.tests]]
+name = "Autodetection: false"
+url = "web3://0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenHTML/false"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "tokenHTML"
+methodArgs = [{type = "bool"}]
+methodArgValues = [{value = false}]
+
 
 
 [groups.argument-multiple]
