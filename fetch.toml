@@ -127,3 +127,14 @@ url = "web3://0x2b51A751d3c7d3554E28DC72C3b032E5f56Aa656/xxxxx"
 outputAsString = ""
 httpCode = 404
 httpHeaders = {}
+
+[groups.resource-request-mode-with-chunks]
+name = "Fetch resourceRequest mode with chunks"
+standards = ["ERC-7617"]
+
+[[groups.resource-request-mode-with-chunks.tests]]
+name = "Call a URL made of 3 chunks"
+url = "web3://0x64850db133e088fc1657c7bf9c00303d36d92736:11155111/getFile/abcd"
+outputAsString = "startmiddleend"
+httpCode = 200
+httpHeaders = {}
