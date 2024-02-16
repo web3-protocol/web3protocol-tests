@@ -128,13 +128,35 @@ outputAsString = ""
 httpCode = 404
 httpHeaders = {}
 
+
+
 [groups.resource-request-mode-with-chunks]
 name = "Fetch resourceRequest mode with chunks"
 standards = ["ERC-7617"]
 
 [[groups.resource-request-mode-with-chunks.tests]]
-name = "Call a URL made of 3 chunks"
+name = "Fetch a body made of 3 chunks"
 url = "web3://0x64850db133e088fc1657c7bf9c00303d36d92736:11155111/getFile/abcd"
 outputAsString = "startmiddleend"
+httpCode = 200
+httpHeaders = {}
+
+
+
+[groups.resource-request-mode-with-compression]
+name = "Fetch resourceRequest mode with compression"
+standards = ["ERC-7618"]
+
+[[groups.resource-request-mode-with-compression.tests]]
+name = "Fetch a body compressed with gzip"
+url = "web3://0x7cee6ee8a44ba3f429f868114cf7e41aec4f8641:11155111/gziped-file.txt"
+outputAsString = "some text"
+httpCode = 200
+httpHeaders = {}
+
+[[groups.resource-request-mode-with-compression.tests]]
+name = "Fetch a body compressed with brotli"
+url = "web3://0x7cee6ee8a44ba3f429f868114cf7e41aec4f8641:11155111/brotlied-file.txt"
+outputAsString = "some text"
 httpCode = 200
 httpHeaders = {}
