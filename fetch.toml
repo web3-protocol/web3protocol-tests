@@ -152,11 +152,11 @@ name = "Fetch a body compressed with gzip"
 url = "web3://0x7cee6ee8a44ba3f429f868114cf7e41aec4f8641:11155111/gziped-file.txt"
 outputAsString = "some text"
 httpCode = 200
-httpHeaders = {}
+httpHeaders = {Content-type = "text/plain"}
 
 [[groups.resource-request-mode-with-compression.tests]]
 name = "Fetch a body compressed with brotli"
 url = "web3://0x7cee6ee8a44ba3f429f868114cf7e41aec4f8641:11155111/brotlied-file.txt"
 outputAsString = "some text"
 httpCode = 200
-httpHeaders = {}
+httpHeaders = {Content-type = "text/plain"}
