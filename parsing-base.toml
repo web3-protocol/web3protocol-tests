@@ -178,12 +178,12 @@ url = "web3://.eth"
 error = { label = "Invalid domain name", httpCode = 400 }
 
 [[groups.ens.tests]]
-name = "ENS host on goerli"
-url = "web3://uniswap.eth:5"
+name = "ENS host on sepolia"
+url = "web3://uniswap.eth:11155111"
 hostDomainNameResolver = "ens"
-hostDomainNameResolverChainId = 5
-contractAddress = "0xD5AD8f4ccEa99855686A53b61ea4D57FE6473B6D"
-chainId = 5
+hostDomainNameResolverChainId = 11155111
+contractAddress = "0x4e3e20fC02f9d4C11BE2D2D64515aB4c33ef4fcc"
+chainId = 11155111
 
 
 [groups.w3ns]

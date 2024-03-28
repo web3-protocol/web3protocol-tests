@@ -60,8 +60,8 @@ httpCode = 200
 httpHeaders = {Content-type = "application/json"}
 
 [[groups.auto-mode-erc-4840.tests]]
-name = "Make a call with ?returns fetching 2 numbers on goerli"
-url = "web3://0x76010876050387FA66E28a1883aD73d576D88Bf2:5/levelAndTile/2/50?returns=(uint256,uint256)"
+name = "Make a call with ?returns fetching 2 numbers on sepolia"
+url = "web3://0x10fE786Dc7Cb9527197C24c53d7330D3db329524:11155111/levelAndTile/2/50?returns=(uint256,uint256)"
 outputAsString = "[\"1\",\"36\"]"
 httpCode = 200
 httpHeaders = {Content-type = "application/json"}
@@ -88,8 +88,8 @@ httpCode = 200
 httpHeaders = {Content-Type = "application/json"}
 
 [[groups.auto-mode-erc-6860.tests]]
-name = "Make a call with ?returns fetching 2 numbers on goerli"
-url = "web3://0x76010876050387FA66E28a1883aD73d576D88Bf2:5/levelAndTile/2/50?returns=(uint256,uint256)"
+name = "Make a call with ?returns fetching 2 numbers on sepolia"
+url = "web3://0x10fE786Dc7Cb9527197C24c53d7330D3db329524:11155111/levelAndTile/2/50?returns=(uint256,uint256)"
 outputAsString = "[\"0x1\",\"0x24\"]"
 httpCode = 200
 httpHeaders = {Content-Type = "application/json"}
