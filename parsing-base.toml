@@ -214,6 +214,30 @@ chainId = 42170
 
 
 
+[groups.fragment]
+name = "Fragment handling"
+standards = ["ERC-4804", "ERC-6860"]
+
+[[groups.fragment.tests]]
+name = "Ethereum address with fragment"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463#abcd"
+contractAddress = "0x5a985f13345e820aa9618826b85f74c3986e1463"
+
+[[groups.fragment.tests]]
+name = "Ethereum address, chaind id with fragment"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:1#abcd"
+contractAddress = "0x5a985f13345e820aa9618826b85f74c3986e1463"
+chainId = 1
+
+[[groups.fragment.tests]]
+name = "Ethereum address, path with fragment"
+url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463/path#abcd"
+contractAddress = "0x5a985f13345e820aa9618826b85f74c3986e1463"
+resolveMode = "auto"
+contractCallMode = "method"
+methodName = "path"
+
+
 [groups.resolve-modes]
 name = "Resolve modes"
 standards = ["ERC-4804", "ERC-6860"]
