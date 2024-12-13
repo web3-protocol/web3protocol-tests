@@ -171,7 +171,7 @@ methodArgValues = [{value = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"}]
 [[groups.argument-address.tests]]
 name = "Type specified, domain name version: Non existing domain"
 url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/address!uniswapxxxxxxxxxxxxxx.eth"
-error = { label = "Cannot resolve domain name", httpCode = 404 }
+error = { label = "Cannot resolve domain name", httpCode = 400 }
 
 [[groups.argument-address.tests]]
 name = "Type specified, domain name version: Non existing domain name provider"
@@ -199,7 +199,7 @@ methodArgValues = [{value = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"}]
 [[groups.argument-address.tests]]
 name = "Autodetection, domain name version: Non existing domain"
 url = "web3://0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/balanceOf/uniswapxxxxxxxxxxxxxxxxx.eth"
-error = { label = "Cannot resolve domain name", httpCode = 404 }
+error = { label = "Cannot resolve domain name", httpCode = 400 }
 
 [[groups.argument-address.tests]]
 name = "Autodetection, domain name version: Non existing domain name provider"

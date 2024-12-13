@@ -119,8 +119,8 @@ chainId = 1
 
 [[groups.chain-id.tests]]
 name = "Specified chain"
-url = "web3://0x5a985f13345e820aa9618826b85f74c3986e1463:5"
-chainId = 5
+url = "web3://0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae:42170"
+chainId = 42170
 
 [[groups.chain-id.tests]]
 name = "Specified chain > 65536"
@@ -170,7 +170,7 @@ chainId = 1
 [[groups.ens.tests]]
 name = "Unregistered ENS name"
 url = "web3://fsdfzefszfsfsdfsdfefe.eth"
-error = { label = "Cannot resolve domain name", httpCode = 404 }
+error = { label = "Cannot resolve domain name", httpCode = 400 }
 
 [[groups.ens.tests]]
 name = "Empty ENS name"

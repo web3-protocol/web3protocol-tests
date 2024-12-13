@@ -43,7 +43,7 @@ httpHeaders = {}
 [[groups.auto-mode.tests]]
 name = "Make a call with a bad method name"
 url = "web3://0xA5aFC9fE76a28fB12C60954Ed6e2e5f8ceF64Ff2/xxxxxxx"
-error = { label = "The contract returned no data (\"0x\").\n\nThis could be due to any of the following:\n  - The contract does not have the requested function,\n  - The parameters passed to the contract function may be invalid, or\n  - The address is not a contract.", httpCode = 404 }
+error = { label = "The contract returned no data (\"0x\").\n\nThis could be due to any of the following:\n  - The contract does not have the requested function,\n  - The parameters passed to the contract function may be invalid, or\n  - The address is not a contract.", httpCode = 400 }
 
 
 
